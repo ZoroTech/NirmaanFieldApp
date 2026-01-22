@@ -74,4 +74,22 @@
         android:label="Daily Progress Report"
         tools:layout="@layout/fragment_dpr" />
 
+    <!-- WebView Fragment - Reusable web content viewer -->
+    <fragment
+        android:id="@+id/webFragment"
+        android:name="com.example.nirmaanfieldapp.ui.web.WebFragment"
+        android:label="Web View"
+        tools:layout="@layout/fragment_web">
+
+        <!-- Arguments: url and title -->
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Web View" />
+    </fragment>
+
 </navigation>
