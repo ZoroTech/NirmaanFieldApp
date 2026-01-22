@@ -53,6 +53,11 @@
         <action
             android:id="@+id/action_dashboardFragment_to_attendanceFragment"
             app:destination="@id/attendanceFragment" />
+
+        <!-- Navigate to DPR -->
+        <action
+            android:id="@+id/action_dashboardFragment_to_dprFragment"
+            app:destination="@id/dprFragment" />
     </fragment>
 
     <!-- Attendance Fragment -->
@@ -61,5 +66,12 @@
         android:name="com.example.nirmaanfieldapp.ui.attendance.AttendanceFragment"
         android:label="Attendance"
         tools:layout="@layout/fragment_attendance" />
+
+    <!-- DPR Fragment -->
+    <fragment
+        android:id="@+id/dprFragment"
+        android:name="com.example.nirmaanfieldapp.ui.dpr.DprFragment"
+        android:label="Daily Progress Report"
+        tools:layout="@layout/fragment_dpr" />
 
 </navigation>

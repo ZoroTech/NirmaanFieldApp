@@ -38,4 +38,25 @@
     <string name="punch_in_time_format">Punch In: %s</string>
     <string name="punch_out_time_format">Punch Out: %s</string>
     <string name="duration_format">Duration: %dh %dm</string>
+
+    <!-- DPR Screen -->
+    <string name="dpr_title">Daily Progress Report</string>
+    <string name="calendar_icon_description">Calendar Icon</string>
+    <string name="work_description_hint">Work Description *</string>
+    <string name="remarks_hint">Remarks (Optional)</string>
+    <string name="photo_section_header">Photo</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="retake_photo">Retake Photo</string>
+    <string name="photo_preview_description">Photo Preview</string>
+    <string name="remove_photo_description">Remove Photo</string>
+    <string name="submit_dpr">Submit DPR</string>
+    <string name="camera_permission_denied">Camera permission denied. Cannot capture photos without camera access.</string>
+    <string name="camera_permission_rationale">Camera permission is required to capture photos for DPR.</string>
+    <string name="camera_open_error">Unable to open camera. Please try again.</string>
+    <string name="photo_display_error">Unable to display photo. Please try again.</string>
+    <string name="photo_removed">Photo removed</string>
+    <string name="error_work_description_empty">Work description is required</string>
+    <string name="dpr_submit_success">DPR submitted successfully!</string>
+    <string name="dpr_submit_error">Failed to submit DPR. Please try again.</string>
+    <string name="go_to_dpr">Daily Progress Report</string>
 </resources>

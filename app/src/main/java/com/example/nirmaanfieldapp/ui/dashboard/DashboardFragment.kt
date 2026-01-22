@@ -17,6 +17,7 @@ import com.google.android.material.button.MaterialButton
 class DashboardFragment : Fragment() {
 
     private lateinit var btnGoToAttendance: MaterialButton
+    private lateinit var btnGoToDpr: MaterialButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,10 +32,15 @@ class DashboardFragment : Fragment() {
 
         // Initialize views
         btnGoToAttendance = view.findViewById(R.id.btnGoToAttendance)
+        btnGoToDpr = view.findViewById(R.id.btnGoToDpr)
 
         // Setup click listeners
         btnGoToAttendance.setOnClickListener {
             navigateToAttendance()
+        }
+
+        btnGoToDpr.setOnClickListener {
+            navigateToDpr()
         }
     }
 
@@ -44,6 +50,17 @@ class DashboardFragment : Fragment() {
     private fun navigateToAttendance() {
         try {
             findNavController().navigate(R.id.action_dashboardFragment_to_attendanceFragment)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * Navigate to DPR screen
+     */
+    private fun navigateToDpr() {
+        try {
+            findNavController().navigate(R.id.action_dashboardFragment_to_dprFragment)
         } catch (e: Exception) {
             e.printStackTrace()
         }
