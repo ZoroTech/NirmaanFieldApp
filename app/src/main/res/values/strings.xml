@@ -4,4 +4,14 @@
     <string name="app_tagline">Construction Management Made Simple</string>
     <string name="app_version">Version 1.0</string>
     <string name="app_logo_description">Nirmaan Field App Logo</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Login to Nirmaan</string>
+    <string name="mobile_number_hint">Mobile Number</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="error_mobile_empty">Mobile number is required</string>
+    <string name="error_mobile_invalid">Mobile number must be 10 digits</string>
+    <string name="error_password_empty">Password is required</string>
+    <string name="login_success">Login successful</string>
 </resources>
