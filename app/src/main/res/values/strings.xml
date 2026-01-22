@@ -24,6 +24,10 @@
     <string name="card_tasks_title">Tasks</string>
     <string name="card_materials_title">Materials</string>
     <string name="coming_soon">Coming soon</string>
+    <string name="logout">Logout</string>
+    <string name="logout_success">Logged out successfully</string>
+    <string name="offline_banner_message">You are offline. Data will sync when connected.</string>
+    <string name="offline_banner_icon_description">Offline Indicator Icon</string>
 
     <!-- Attendance Screen -->
     <string name="attendance_title">Attendance</string>
