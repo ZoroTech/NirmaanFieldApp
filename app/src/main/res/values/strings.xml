@@ -14,4 +14,28 @@
     <string name="error_mobile_invalid">Mobile number must be 10 digits</string>
     <string name="error_password_empty">Password is required</string>
     <string name="login_success">Login successful</string>
+
+    <!-- Dashboard Screen -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="go_to_attendance">Go to Attendance</string>
+
+    <!-- Attendance Screen -->
+    <string name="attendance_title">Attendance</string>
+    <string name="location_icon_description">Location Icon</string>
+    <string name="location_not_captured">Location not captured</string>
+    <string name="location_fetching">Fetching location…</string>
+    <string name="location_captured">Location captured</string>
+    <string name="location_already_captured">Already punched in today</string>
+    <string name="location_failed">Failed to get location</string>
+    <string name="location_permission_required">Location permission required</string>
+    <string name="location_permission_denied">Location permission denied. Cannot capture attendance without location access.</string>
+    <string name="location_capture_error">Unable to capture location. Please ensure GPS is enabled and try again.</string>
+    <string name="punch_in">Punch In</string>
+    <string name="punch_out">Punch Out</string>
+    <string name="punch_in_success">Punched in successfully!</string>
+    <string name="punch_out_success">Punched out successfully!</string>
+    <string name="today_summary">Today\'s Summary</string>
+    <string name="punch_in_time_format">Punch In: %s</string>
+    <string name="punch_out_time_format">Punch Out: %s</string>
+    <string name="duration_format">Duration: %dh %dm</string>
 </resources>
