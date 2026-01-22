@@ -17,7 +17,13 @@
 
     <!-- Dashboard Screen -->
     <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_subtitle">Welcome to Nirmaan Field App</string>
     <string name="go_to_attendance">Go to Attendance</string>
+    <string name="card_attendance_title">Attendance</string>
+    <string name="card_dpr_title">Daily Progress Report</string>
+    <string name="card_tasks_title">Tasks</string>
+    <string name="card_materials_title">Materials</string>
+    <string name="coming_soon">Coming soon</string>
 
     <!-- Attendance Screen -->
     <string name="attendance_title">Attendance</string>
