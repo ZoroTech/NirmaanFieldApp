@@ -135,7 +135,6 @@ class WebFragment : Fragment() {
 
             // Enable caching
             settings.cacheMode = android.webkit.WebSettings.LOAD_DEFAULT
-            settings.setAppCacheEnabled(true)
 
             // Additional recommended settings
             settings.loadWithOverviewMode = true
@@ -240,11 +239,10 @@ class WebFragment : Fragment() {
 
         // Cleanup WebView to prevent memory leaks
         webView.apply {
-            stopLoading()
-            webViewClient = null
-            webChromeClient = null
-            removeAllViews()
-            destroy()
+            webView.stopLoading()
+            webView.clearHistory()
+            webView.removeAllViews()
+            webView.destroy()
         }
     }
 

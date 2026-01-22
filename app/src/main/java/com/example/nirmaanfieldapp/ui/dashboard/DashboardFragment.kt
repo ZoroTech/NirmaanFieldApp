@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.nirmaanfieldapp.R
 import com.google.android.material.card.MaterialCardView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 
 /**
  * DashboardFragment - Main dashboard for the Nirmaan Field App
@@ -70,14 +72,22 @@ class DashboardFragment : Fragment() {
             navigateToDpr()
         }
 
-        // Tasks Card - Show coming soon toast
+        // Tasks → WebView
         cardTasks.setOnClickListener {
-            showComingSoonToast(getString(R.string.card_tasks_title))
+            val bundle = bundleOf(
+                "url" to "\n" + "https://nirmaan-frontend.vercel.app/task",
+                "title" to "Tasks"
+            )
+            findNavController().navigate(R.id.webFragment, bundle)
         }
 
-        // Materials Card - Show coming soon toast
+        // Materials → WebView
         cardMaterials.setOnClickListener {
-            showComingSoonToast(getString(R.string.card_materials_title))
+            val bundle = bundleOf(
+                "url" to "https://nirmaan-frontend.vercel.app/invoice",
+                "title" to "Materials"
+            )
+            findNavController().navigate(R.id.webFragment, bundle)
         }
     }
 
