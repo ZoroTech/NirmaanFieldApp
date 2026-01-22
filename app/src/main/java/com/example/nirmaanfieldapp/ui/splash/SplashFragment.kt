@@ -1,4 +1,4 @@
-package com.nirmaan.app.ui.splash
+package com.example.nirmaanfieldapp.ui.splash
 
 import android.content.Context
 import android.os.Bundle
@@ -86,6 +86,10 @@ class SplashFragment : Fragment() {
 
         try {
             val navController = findNavController()
+
+            if (findNavController().currentDestination?.id != R.id.splashFragment) {
+                return
+            }
 
             if (isLoggedIn) {
                 // User is logged in - navigate to dashboard

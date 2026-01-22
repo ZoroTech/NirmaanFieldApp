@@ -8,7 +8,7 @@
     <!-- Splash Fragment - Entry point -->
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.nirmaan.app.ui.splash.SplashFragment"
+        android:name="com.example.nirmaanfieldapp.ui.splash.SplashFragment"
         android:label="Splash"
         tools:layout="@layout/fragment_splash">
 
@@ -30,14 +30,14 @@
     <!-- Login Fragment - Placeholder (to be implemented) -->
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.nirmaan.app.ui.login.LoginFragment"
+        android:name="com.example.nirmaanfieldapp.ui.login.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login" />
 
     <!-- Dashboard Fragment - Placeholder (to be implemented) -->
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.nirmaan.app.ui.dashboard.DashboardFragment"
+        android:name="com.example.nirmaanfieldapp.ui.dashboard.DashboardFragment"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
 

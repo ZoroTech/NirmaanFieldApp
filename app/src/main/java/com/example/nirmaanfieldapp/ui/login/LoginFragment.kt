@@ -1,4 +1,4 @@
-package com.nirmaan.app.ui.login
+package com.example.nirmaanfieldapp.ui.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
