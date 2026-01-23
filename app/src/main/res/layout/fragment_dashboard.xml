@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/gray_50"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,8 +68,8 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/dashboard_title"
-            android:textColor="@color/black"
-            android:textSize="28sp"
+            android:textColor="@color/primary_blue"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/btnLogout"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,9 +99,8 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:text="@string/dashboard_subtitle"
-            android:textColor="@color/black"
+            android:textColor="@color/gray_600"
             android:textSize="16sp"
-            android:alpha="0.7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDashboardTitle" />
@@ -122,42 +121,43 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAttendance"
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="180dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/gradient_card"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <!-- Attendance Icon -->
                     <ImageView
                         android:id="@+id/ivAttendanceIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:contentDescription="@string/card_attendance_title"
                         android:src="@android:drawable/ic_menu_day"
-                        app:tint="@color/purple_500" />
+                        app:tint="@color/white" />
 
                     <!-- Attendance Title -->
                     <TextView
                         android:id="@+id/tvAttendanceTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
                         android:text="@string/card_attendance_title"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -168,42 +168,43 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDpr"
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="180dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/gradient_button"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <!-- DPR Icon -->
                     <ImageView
                         android:id="@+id/ivDprIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:contentDescription="@string/card_dpr_title"
                         android:src="@android:drawable/ic_menu_edit"
-                        app:tint="@color/purple_500" />
+                        app:tint="@color/white" />
 
                     <!-- DPR Title -->
                     <TextView
                         android:id="@+id/tvDprTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
                         android:text="@string/card_dpr_title"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -228,42 +229,43 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardTasks"
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="180dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/gradient_blue_deep"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <!-- Tasks Icon -->
                     <ImageView
                         android:id="@+id/ivTasksIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:contentDescription="@string/card_tasks_title"
                         android:src="@android:drawable/ic_menu_agenda"
-                        app:tint="@color/purple_500" />
+                        app:tint="@color/white" />
 
                     <!-- Tasks Title -->
                     <TextView
                         android:id="@+id/tvTasksTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
                         android:text="@string/card_tasks_title"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -274,42 +276,43 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardMaterials"
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="180dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/gradient_success"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <!-- Materials Icon -->
                     <ImageView
                         android:id="@+id/ivMaterialsIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:contentDescription="@string/card_materials_title"
                         android:src="@android:drawable/ic_menu_view"
-                        app:tint="@color/purple_500" />
+                        app:tint="@color/white" />
 
                     <!-- Materials Title -->
                     <TextView
                         android:id="@+id/tvMaterialsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
                         android:text="@string/card_materials_title"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

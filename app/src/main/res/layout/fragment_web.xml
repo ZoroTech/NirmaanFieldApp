@@ -12,8 +12,8 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_500"
-        android:elevation="4dp"
+        android:background="@drawable/gradient_card"
+        android:elevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +41,7 @@
         android:indeterminate="false"
         android:max="100"
         android:progress="0"
-        android:progressTint="@color/purple_500"
+        android:progressTint="@color/accent_orange"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:visibility="gone"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
                 android:layout_height="64dp"
                 android:contentDescription="@string/offline_icon_description"
                 android:src="@android:drawable/stat_notify_error"
-                app:tint="@color/purple_500" />
+                app:tint="@color/error_red" />
 
             <!-- Offline Title -->
             <TextView
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/no_internet_connection"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_900"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -99,9 +99,8 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/offline_message"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:alpha="0.7" />
+                android:textColor="@color/gray_600"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

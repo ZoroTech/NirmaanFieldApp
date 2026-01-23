@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- Primary Brand Colors - Deep Blue to Teal -->
+    <color name="primary_blue">#1E3A8A</color>
+    <color name="primary_blue_dark">#1E40AF</color>
+    <color name="primary_teal">#0891B2</color>
+    <color name="primary_teal_light">#06B6D4</color>
+
+    <!-- Accent Colors - Warm Orange/Coral -->
+    <color name="accent_orange">#F97316</color>
+    <color name="accent_orange_light">#FB923C</color>
+    <color name="accent_coral">#FF6B6B</color>
+
+    <!-- Success & Status Colors -->
+    <color name="success_green">#10B981</color>
+    <color name="warning_amber">#F59E0B</color>
+    <color name="error_red">#EF4444</color>
+
+    <!-- Neutral Colors -->
+    <color name="gray_50">#F9FAFB</color>
+    <color name="gray_100">#F3F4F6</color>
+    <color name="gray_200">#E5E7EB</color>
+    <color name="gray_300">#D1D5DB</color>
+    <color name="gray_600">#4B5563</color>
+    <color name="gray_800">#1F2937</color>
+    <color name="gray_900">#111827</color>
+
+    <!-- Base Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#1E3A8A</color>
+    <color name="gradient_middle">#0891B2</color>
+    <color name="gradient_end">#06B6D4</color>
+
+    <!-- Legacy Support -->
+    <color name="purple_500">#1E3A8A</color>
+    <color name="purple_700">#1E40AF</color>
 </resources>
