@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,16 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="24dp"
+        android:background="@color/gray_50"
         tools:context=".ui.attendance.AttendanceFragment">
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray_50"
-    android:padding="24dp"
-    tools:context=".ui.attendance.AttendanceFragment">
 
     <!-- Title -->
     <TextView
@@ -480,13 +473,42 @@
 
     </LinearLayout>
 
+    <!-- Verified Badge - Shown after Punch Out completion -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardVerifiedBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/verified_badge_bg"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutPhotosContainer"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvVerifiedBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:text="@string/verified_badge_text"
+            android:textColor="@color/verified_badge_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.01" />
+
+    </com.google.android.material.card.MaterialCardView>
+
     <!-- Bottom Spacing -->
     <View
         android:layout_width="match_parent"
         android:layout_height="24dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutPhotosContainer" />
+        app:layout_constraintTop_toBottomOf="@id/cardVerifiedBadge" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

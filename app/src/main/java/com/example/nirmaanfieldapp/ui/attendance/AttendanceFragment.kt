@@ -79,6 +79,7 @@ class AttendanceFragment : Fragment() {
     private lateinit var tvProofPunchOutTime: TextView
     private lateinit var tvProofPunchOutLat: TextView
     private lateinit var tvProofPunchOutLng: TextView
+    private lateinit var cardVerifiedBadge: MaterialCardView
 
     // Location client
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -240,6 +241,9 @@ class AttendanceFragment : Fragment() {
         tvProofPunchOutTime = view.findViewById(R.id.tvProofPunchOutTime)
         tvProofPunchOutLat = view.findViewById(R.id.tvProofPunchOutLat)
         tvProofPunchOutLng = view.findViewById(R.id.tvProofPunchOutLng)
+
+        // Verified badge
+        cardVerifiedBadge = view.findViewById(R.id.cardVerifiedBadge)
     }
 
     /**
@@ -583,6 +587,7 @@ class AttendanceFragment : Fragment() {
         tvPunchInPhotoLabel.visibility = View.GONE
         ivPunchInPhoto.visibility = View.GONE
         cardGpsLocation.visibility = View.GONE
+        cardVerifiedBadge.visibility = View.GONE
         punchInPhotoBitmap = null
     }
 
@@ -697,9 +702,13 @@ class AttendanceFragment : Fragment() {
                 tvProofPunchOutLat.text = "Lat: $punchOutLat"
                 tvProofPunchOutLng.text = "Lng: $punchOutLng"
             }
+
+            // Show verified badge when punch out is complete
+            cardVerifiedBadge.visibility = View.VISIBLE
         } else {
-            // Hide punch out section until punch out is completed
+            // Hide punch out section and badge until punch out is completed
             layoutPunchOutProof.visibility = View.GONE
+            cardVerifiedBadge.visibility = View.GONE
         }
     }
 

@@ -74,6 +74,9 @@
     <string name="dpr_submit_error">Failed to submit DPR. Please try again.</string>
     <string name="go_to_dpr">Daily Progress Report</string>
 
+    <!-- Verified Badge -->
+    <string name="verified_badge_text">Verified (Visual + GPS) — Demo</string>
+
     <!-- WebView Screen -->
     <string name="web_view_title">Web View</string>
     <string name="no_internet_connection">No Internet Connection</string>

@@ -34,6 +34,10 @@
     <color name="gradient_middle">#0891B2</color>
     <color name="gradient_end">#06B6D4</color>
 
+    <!-- Verified Badge -->
+    <color name="verified_badge_bg">#D1FAE5</color>
+    <color name="verified_badge_text">#065F46</color>
+
     <!-- Legacy Support -->
     <color name="purple_500">#1E3A8A</color>
     <color name="purple_700">#1E40AF</color>
