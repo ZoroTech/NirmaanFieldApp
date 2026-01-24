@@ -67,6 +67,18 @@ class AttendanceFragment : Fragment() {
     private lateinit var cardGpsLocation: MaterialCardView
     private lateinit var tvLatitude: TextView
     private lateinit var tvLongitude: TextView
+    private lateinit var tvVisualProofTitle: TextView
+    private lateinit var layoutPhotosContainer: android.widget.LinearLayout
+    private lateinit var layoutPunchInProof: android.widget.LinearLayout
+    private lateinit var layoutPunchOutProof: android.widget.LinearLayout
+    private lateinit var ivProofPunchInPhoto: ImageView
+    private lateinit var ivProofPunchOutPhoto: ImageView
+    private lateinit var tvProofPunchInTime: TextView
+    private lateinit var tvProofPunchInLat: TextView
+    private lateinit var tvProofPunchInLng: TextView
+    private lateinit var tvProofPunchOutTime: TextView
+    private lateinit var tvProofPunchOutLat: TextView
+    private lateinit var tvProofPunchOutLng: TextView
 
     // Location client
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -214,6 +226,20 @@ class AttendanceFragment : Fragment() {
         cardGpsLocation = view.findViewById(R.id.cardGpsLocation)
         tvLatitude = view.findViewById(R.id.tvLatitude)
         tvLongitude = view.findViewById(R.id.tvLongitude)
+
+        // Visual proof section
+        tvVisualProofTitle = view.findViewById(R.id.tvVisualProofTitle)
+        layoutPhotosContainer = view.findViewById(R.id.layoutPhotosContainer)
+        layoutPunchInProof = view.findViewById(R.id.layoutPunchInProof)
+        layoutPunchOutProof = view.findViewById(R.id.layoutPunchOutProof)
+        ivProofPunchInPhoto = view.findViewById(R.id.ivProofPunchInPhoto)
+        ivProofPunchOutPhoto = view.findViewById(R.id.ivProofPunchOutPhoto)
+        tvProofPunchInTime = view.findViewById(R.id.tvProofPunchInTime)
+        tvProofPunchInLat = view.findViewById(R.id.tvProofPunchInLat)
+        tvProofPunchInLng = view.findViewById(R.id.tvProofPunchInLng)
+        tvProofPunchOutTime = view.findViewById(R.id.tvProofPunchOutTime)
+        tvProofPunchOutLat = view.findViewById(R.id.tvProofPunchOutLat)
+        tvProofPunchOutLng = view.findViewById(R.id.tvProofPunchOutLng)
     }
 
     /**
@@ -603,9 +629,77 @@ class AttendanceFragment : Fragment() {
                 tvPunchOutTime.visibility = View.GONE
                 tvTotalDuration.visibility = View.GONE
             }
+
+            // Update visual attendance proof section
+            updateVisualAttendanceProof()
         } else {
             // Hide summary card
             cardAttendanceSummary.visibility = View.GONE
+        }
+    }
+
+    /**
+     * Update visual attendance proof section with photos and GPS details
+     * Loads data from SharedPreferences and displays:
+     * - Punch In photo (if available) with time and GPS coords
+     * - Punch Out photo (if available) with time and GPS coords
+     */
+    private fun updateVisualAttendanceProof() {
+        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val punchInTime = prefs.getLong(KEY_PUNCH_IN_TIME, 0L)
+        val punchOutTime = prefs.getLong(KEY_PUNCH_OUT_TIME, 0L)
+
+        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+
+        // Show visual proof title and container
+        tvVisualProofTitle.visibility = View.VISIBLE
+        layoutPhotosContainer.visibility = View.VISIBLE
+
+        // Populate Punch In section
+        if (punchInTime > 0) {
+            layoutPunchInProof.visibility = View.VISIBLE
+
+            // Set punch in photo
+            if (punchInPhotoBitmap != null) {
+                ivProofPunchInPhoto.setImageBitmap(punchInPhotoBitmap)
+            }
+
+            // Set punch in time
+            tvProofPunchInTime.text = timeFormat.format(Date(punchInTime))
+
+            // Set punch in GPS coordinates
+            val punchInLat = prefs.getString(KEY_PUNCH_IN_LAT, "")
+            val punchInLng = prefs.getString(KEY_PUNCH_IN_LNG, "")
+
+            if (!punchInLat.isNullOrEmpty() && !punchInLng.isNullOrEmpty()) {
+                tvProofPunchInLat.text = "Lat: $punchInLat"
+                tvProofPunchInLng.text = "Lng: $punchInLng"
+            }
+        }
+
+        // Populate Punch Out section
+        if (punchOutTime > 0) {
+            layoutPunchOutProof.visibility = View.VISIBLE
+
+            // Set punch out photo
+            if (punchOutPhotoBitmap != null) {
+                ivProofPunchOutPhoto.setImageBitmap(punchOutPhotoBitmap)
+            }
+
+            // Set punch out time
+            tvProofPunchOutTime.text = timeFormat.format(Date(punchOutTime))
+
+            // Set punch out GPS coordinates
+            val punchOutLat = prefs.getString(KEY_PUNCH_OUT_LAT, "")
+            val punchOutLng = prefs.getString(KEY_PUNCH_OUT_LNG, "")
+
+            if (!punchOutLat.isNullOrEmpty() && !punchOutLng.isNullOrEmpty()) {
+                tvProofPunchOutLat.text = "Lat: $punchOutLat"
+                tvProofPunchOutLng.text = "Lng: $punchOutLng"
+            }
+        } else {
+            // Hide punch out section until punch out is completed
+            layoutPunchOutProof.visibility = View.GONE
         }
     }
 

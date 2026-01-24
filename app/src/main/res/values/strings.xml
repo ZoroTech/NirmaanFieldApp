@@ -50,6 +50,8 @@
     <string name="duration_format">Duration: %dh %dm</string>
     <string name="punch_in_photo_label">Punch In Photo</string>
     <string name="punch_in_photo_description">Photo taken during punch in</string>
+    <string name="punch_out_photo_description">Photo taken during punch out</string>
+    <string name="visual_attendance_proof">Visual Attendance Proof</string>
 
     <!-- DPR Screen -->
     <string name="dpr_title">Daily Progress Report</string>

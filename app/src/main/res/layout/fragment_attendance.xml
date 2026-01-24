@@ -257,7 +257,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnPunchOut"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:visibility="visible">
 
         <LinearLayout
@@ -270,7 +269,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/today_summary"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_800"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -280,7 +279,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_800"
                 android:textSize="14sp"
                 tools:text="Punch In: 09:00 AM" />
 
@@ -290,7 +289,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_800"
                 android:textSize="14sp"
                 tools:text="Punch Out: 06:00 PM" />
 
@@ -300,7 +299,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/black"
+                android:textColor="@color/gray_800"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="Duration: 9h 0m" />
@@ -308,5 +307,170 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <!-- Visual Attendance Proof Section -->
+    <TextView
+        android:id="@+id/tvVisualProofTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/visual_attendance_proof"
+        android:textColor="@color/gray_800"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardAttendanceSummary"
+        tools:visibility="visible" />
+
+    <!-- Punch In & Punch Out Photos Container -->
+    <LinearLayout
+        android:id="@+id/layoutPhotosContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvVisualProofTitle"
+        tools:visibility="visible">
+
+        <!-- Punch In Photo Section -->
+        <LinearLayout
+            android:id="@+id/layoutPunchInProof"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <!-- Punch In Photo Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/ivProofPunchInPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray_300"
+                    android:contentDescription="@string/punch_in_photo_description"
+                    android:scaleType="centerCrop" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Punch In Time & Location Details -->
+            <TextView
+                android:id="@+id/tvProofPunchInTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/gray_800"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="09:00 AM" />
+
+            <TextView
+                android:id="@+id/tvProofPunchInLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/gray_600"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Lat: 28.7041" />
+
+            <TextView
+                android:id="@+id/tvProofPunchInLng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/gray_600"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Lng: 77.1025" />
+
+        </LinearLayout>
+
+        <!-- Punch Out Photo Section -->
+        <LinearLayout
+            android:id="@+id/layoutPunchOutProof"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Punch Out Photo Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/ivProofPunchOutPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray_300"
+                    android:contentDescription="@string/punch_out_photo_description"
+                    android:scaleType="centerCrop" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Punch Out Time & Location Details -->
+            <TextView
+                android:id="@+id/tvProofPunchOutTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/gray_800"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="06:00 PM" />
+
+            <TextView
+                android:id="@+id/tvProofPunchOutLat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/gray_600"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Lat: 28.7041" />
+
+            <TextView
+                android:id="@+id/tvProofPunchOutLng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/gray_600"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Lng: 77.1025" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Bottom Spacing -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutPhotosContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
