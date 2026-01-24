@@ -73,6 +73,7 @@ class AttendanceFragment : Fragment() {
 
     // Photo storage
     private var punchInPhotoBitmap: Bitmap? = null
+    private var punchOutPhotoBitmap: Bitmap? = null
 
     // Time update handler
     private val timeUpdateHandler = Handler(Looper.getMainLooper())
@@ -100,13 +101,13 @@ class AttendanceFragment : Fragment() {
         }
     }
 
-    // Camera permission launcher
+    // Camera permission launcher for Punch In
     private val cameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            // Permission granted - open camera
-            openCamera()
+            // Permission granted - open camera for Punch In
+            openCameraForPunchIn()
         } else {
             // Permission denied - show message
             Toast.makeText(
@@ -117,14 +118,51 @@ class AttendanceFragment : Fragment() {
         }
     }
 
-    // Camera launcher - TakePicturePreview
+    // Camera permission launcher for Punch Out
+    private val cameraPermissionLauncherPunchOut = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            // Permission granted - open camera for Punch Out
+            openCameraForPunchOut()
+        } else {
+            // Permission denied - show message
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.camera_permission_denied),
+                Toast.LENGTH_LONG
+            ).show()
+            resetButtonStates()
+        }
+    }
+
+    // Camera launcher for Punch In - TakePicturePreview
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicturePreview()
     ) { bitmap ->
         if (bitmap != null) {
-            // Photo captured successfully
+            // Punch In photo captured successfully
             punchInPhotoBitmap = bitmap
             displayPunchInPhoto(bitmap)
+        }
+    }
+
+    // Camera launcher for Punch Out - TakePicturePreview
+    private val cameraLauncherPunchOut = registerForActivityResult(
+        ActivityResultContracts.TakePicturePreview()
+    ) { bitmap ->
+        if (bitmap != null) {
+            // Punch Out photo captured successfully
+            punchOutPhotoBitmap = bitmap
+            // After photo is captured, request location for Punch Out
+            updateLocationStatus(getString(R.string.location_fetching))
+            if (checkLocationPermission()) {
+                // Permission already granted - capture location
+                captureLocationAndSaveAttendance()
+            } else {
+                // Request permission
+                requestLocationPermission()
+            }
         }
     }
 
@@ -240,18 +278,19 @@ class AttendanceFragment : Fragment() {
 
     /**
      * Handle Punch Out button click
+     * First requests camera permission, then opens camera for photo capture
+     * After photo capture, proceeds with location capture
      */
     private fun handlePunchOut() {
         currentAction = AttendanceAction.PUNCH_OUT
-        updateLocationStatus(getString(R.string.location_fetching))
 
-        // Check for location permission
-        if (checkLocationPermission()) {
-            // Permission already granted - capture location
-            captureLocationAndSaveAttendance()
+        // Check for camera permission first
+        if (checkCameraPermission()) {
+            // Permission already granted - open camera
+            openCameraForPunchOut()
         } else {
-            // Request permission
-            requestLocationPermission()
+            // Request camera permission
+            requestCameraPermissionForPunchOut()
         }
     }
 
@@ -283,17 +322,31 @@ class AttendanceFragment : Fragment() {
     }
 
     /**
-     * Request camera permission
+     * Request camera permission for Punch In
      */
     private fun requestCameraPermission() {
         cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
     }
 
     /**
-     * Open camera using TakePicturePreview contract
+     * Request camera permission for Punch Out
      */
-    private fun openCamera() {
+    private fun requestCameraPermissionForPunchOut() {
+        cameraPermissionLauncherPunchOut.launch(Manifest.permission.CAMERA)
+    }
+
+    /**
+     * Open camera for Punch In using TakePicturePreview contract
+     */
+    private fun openCameraForPunchIn() {
         cameraLauncher.launch(null)
+    }
+
+    /**
+     * Open camera for Punch Out using TakePicturePreview contract
+     */
+    private fun openCameraForPunchOut() {
+        cameraLauncherPunchOut.launch(null)
     }
 
     /**
@@ -428,6 +481,7 @@ class AttendanceFragment : Fragment() {
 
     /**
      * Save Punch Out attendance to SharedPreferences
+     * Includes photo URI and GPS coordinates
      */
     private fun savePunchOut(latitude: Double, longitude: Double, timestamp: Long) {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -436,6 +490,11 @@ class AttendanceFragment : Fragment() {
             putString(KEY_PUNCH_OUT_LAT, latitude.toString())
             putString(KEY_PUNCH_OUT_LNG, longitude.toString())
             putBoolean(KEY_IS_PUNCHED_IN, false)
+
+            // Store punch out photo and photo flag
+            if (punchOutPhotoBitmap != null) {
+                putBoolean("punch_out_photo_captured", true)
+            }
             apply()
         }
 
@@ -634,8 +693,9 @@ class AttendanceFragment : Fragment() {
         // Stop time updates when view is destroyed
         timeUpdateHandler.removeCallbacks(timeUpdateRunnable)
 
-        // Clear photo bitmap to prevent memory leaks
+        // Clear photo bitmaps to prevent memory leaks
         punchInPhotoBitmap = null
+        punchOutPhotoBitmap = null
     }
 
     /**
