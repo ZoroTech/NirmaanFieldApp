@@ -295,7 +295,7 @@ class AttendanceFragment : Fragment() {
         // Check for camera permission
         if (checkCameraPermission()) {
             // Permission already granted - open camera
-            openCamera()
+            openCameraForPunchIn()
         } else {
             // Request camera permission
             requestCameraPermission()
