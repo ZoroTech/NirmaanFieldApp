@@ -48,6 +48,8 @@
     <string name="punch_in_time_format">Punch In: %s</string>
     <string name="punch_out_time_format">Punch Out: %s</string>
     <string name="duration_format">Duration: %dh %dm</string>
+    <string name="punch_in_photo_label">Punch In Photo</string>
+    <string name="punch_in_photo_description">Photo taken during punch in</string>
 
     <!-- DPR Screen -->
     <string name="dpr_title">Daily Progress Report</string>

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -60,9 +62,14 @@ class AttendanceFragment : Fragment() {
     private lateinit var tvPunchInTime: TextView
     private lateinit var tvPunchOutTime: TextView
     private lateinit var tvTotalDuration: TextView
+    private lateinit var tvPunchInPhotoLabel: TextView
+    private lateinit var ivPunchInPhoto: ImageView
 
     // Location client
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    // Photo storage
+    private var punchInPhotoBitmap: Bitmap? = null
 
     // Time update handler
     private val timeUpdateHandler = Handler(Looper.getMainLooper())
@@ -87,6 +94,34 @@ class AttendanceFragment : Fragment() {
             ).show()
             updateLocationStatus(getString(R.string.location_permission_required))
             resetButtonStates()
+        }
+    }
+
+    // Camera permission launcher
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            // Permission granted - open camera
+            openCamera()
+        } else {
+            // Permission denied - show message
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.camera_permission_denied),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    // Camera launcher - TakePicturePreview
+    private val cameraLauncher = registerForActivityResult(
+        ActivityResultContracts.TakePicturePreview()
+    ) { bitmap ->
+        if (bitmap != null) {
+            // Photo captured successfully
+            punchInPhotoBitmap = bitmap
+            displayPunchInPhoto(bitmap)
         }
     }
 
@@ -133,6 +168,8 @@ class AttendanceFragment : Fragment() {
         tvPunchInTime = view.findViewById(R.id.tvPunchInTime)
         tvPunchOutTime = view.findViewById(R.id.tvPunchOutTime)
         tvTotalDuration = view.findViewById(R.id.tvTotalDuration)
+        tvPunchInPhotoLabel = view.findViewById(R.id.tvPunchInPhotoLabel)
+        ivPunchInPhoto = view.findViewById(R.id.ivPunchInPhoto)
     }
 
     /**
@@ -180,18 +217,18 @@ class AttendanceFragment : Fragment() {
 
     /**
      * Handle Punch In button click
+     * First requests camera permission, then opens camera for photo capture
      */
     private fun handlePunchIn() {
         currentAction = AttendanceAction.PUNCH_IN
-        updateLocationStatus(getString(R.string.location_fetching))
 
-        // Check for location permission
-        if (checkLocationPermission()) {
-            // Permission already granted - capture location
-            captureLocationAndSaveAttendance()
+        // Check for camera permission
+        if (checkCameraPermission()) {
+            // Permission already granted - open camera
+            openCamera()
         } else {
-            // Request permission
-            requestLocationPermission()
+            // Request camera permission
+            requestCameraPermission()
         }
     }
 
@@ -227,6 +264,51 @@ class AttendanceFragment : Fragment() {
      */
     private fun requestLocationPermission() {
         locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+    }
+
+    /**
+     * Check if camera permission is granted
+     */
+    private fun checkCameraPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    /**
+     * Request camera permission
+     */
+    private fun requestCameraPermission() {
+        cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+    }
+
+    /**
+     * Open camera using TakePicturePreview contract
+     */
+    private fun openCamera() {
+        cameraLauncher.launch(null)
+    }
+
+    /**
+     * Display captured photo in ImageView
+     */
+    private fun displayPunchInPhoto(bitmap: Bitmap) {
+        tvPunchInPhotoLabel.visibility = View.VISIBLE
+        ivPunchInPhoto.visibility = View.VISIBLE
+        ivPunchInPhoto.setImageBitmap(bitmap)
+
+        // After photo is displayed, proceed with location and attendance
+        updateLocationStatus(getString(R.string.location_fetching))
+
+        // Check for location permission
+        if (checkLocationPermission()) {
+            // Permission already granted - capture location
+            captureLocationAndSaveAttendance()
+        } else {
+            // Request permission
+            requestLocationPermission()
+        }
     }
 
     /**
@@ -402,6 +484,9 @@ class AttendanceFragment : Fragment() {
         btnPunchIn.isEnabled = true
         btnPunchOut.isEnabled = false
         cardAttendanceSummary.visibility = View.GONE
+        tvPunchInPhotoLabel.visibility = View.GONE
+        ivPunchInPhoto.visibility = View.GONE
+        punchInPhotoBitmap = null
     }
 
     /**
@@ -488,6 +573,9 @@ class AttendanceFragment : Fragment() {
         super.onDestroyView()
         // Stop time updates when view is destroyed
         timeUpdateHandler.removeCallbacks(timeUpdateRunnable)
+
+        // Clear photo bitmap to prevent memory leaks
+        punchInPhotoBitmap = null
     }
 
     /**
