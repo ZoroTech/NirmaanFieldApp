@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Latitude: --"
-                android:textColor="@color/gray_700"
+                android:textColor="@color/gray_800"
                 android:textSize="13sp"
                 android:fontFamily="monospace"
                 android:letterSpacing="0.02" />
@@ -213,7 +213,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Longitude: --"
-                android:textColor="@color/gray_700"
+                android:textColor="@color/gray_800"
                 android:textSize="13sp"
                 android:fontFamily="monospace"
                 android:letterSpacing="0.02" />
