@@ -64,6 +64,9 @@ class AttendanceFragment : Fragment() {
     private lateinit var tvTotalDuration: TextView
     private lateinit var tvPunchInPhotoLabel: TextView
     private lateinit var ivPunchInPhoto: ImageView
+    private lateinit var cardGpsLocation: MaterialCardView
+    private lateinit var tvLatitude: TextView
+    private lateinit var tvLongitude: TextView
 
     // Location client
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -170,6 +173,9 @@ class AttendanceFragment : Fragment() {
         tvTotalDuration = view.findViewById(R.id.tvTotalDuration)
         tvPunchInPhotoLabel = view.findViewById(R.id.tvPunchInPhotoLabel)
         ivPunchInPhoto = view.findViewById(R.id.ivPunchInPhoto)
+        cardGpsLocation = view.findViewById(R.id.cardGpsLocation)
+        tvLatitude = view.findViewById(R.id.tvLatitude)
+        tvLongitude = view.findViewById(R.id.tvLongitude)
     }
 
     /**
@@ -356,6 +362,8 @@ class AttendanceFragment : Fragment() {
         when (currentAction) {
             AttendanceAction.PUNCH_IN -> {
                 savePunchIn(latitude, longitude, timestamp)
+                // Display GPS coordinates for Punch In only
+                displayGpsCoordinates(latitude, longitude)
             }
             AttendanceAction.PUNCH_OUT -> {
                 savePunchOut(latitude, longitude, timestamp)
@@ -468,6 +476,9 @@ class AttendanceFragment : Fragment() {
 
             // Update attendance summary
             updateAttendanceSummary()
+
+            // Restore GPS coordinates display if punch in exists
+            restoreGpsCoordinatesDisplay()
         } else {
             // Different day or no data - reset state
             resetAttendanceForNewDay()
@@ -486,6 +497,7 @@ class AttendanceFragment : Fragment() {
         cardAttendanceSummary.visibility = View.GONE
         tvPunchInPhotoLabel.visibility = View.GONE
         ivPunchInPhoto.visibility = View.GONE
+        cardGpsLocation.visibility = View.GONE
         punchInPhotoBitmap = null
     }
 
@@ -543,6 +555,54 @@ class AttendanceFragment : Fragment() {
      */
     private fun updateLocationStatus(status: String) {
         tvLocationStatus.text = status
+    }
+
+    /**
+     * Display GPS coordinates for Punch In
+     * Only visible during and after Punch In operation
+     *
+     * @param latitude The latitude value from GPS
+     * @param longitude The longitude value from GPS
+     */
+    private fun displayGpsCoordinates(latitude: Double, longitude: Double) {
+        // Format coordinates to 6 decimal places for accuracy
+        val formattedLatitude = String.format("%.6f", latitude)
+        val formattedLongitude = String.format("%.6f", longitude)
+
+        // Update UI elements with GPS data
+        tvLatitude.text = "Latitude: $formattedLatitude"
+        tvLongitude.text = "Longitude: $formattedLongitude"
+
+        // Show the GPS location card
+        cardGpsLocation.visibility = View.VISIBLE
+
+        // Save GPS data to SharedPreferences for persistence
+        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().apply {
+            putString("last_punch_in_lat_display", formattedLatitude)
+            putString("last_punch_in_lng_display", formattedLongitude)
+            apply()
+        }
+    }
+
+    /**
+     * Restore GPS coordinates display if punch in exists today
+     */
+    private fun restoreGpsCoordinatesDisplay() {
+        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val punchInTime = prefs.getLong(KEY_PUNCH_IN_TIME, 0L)
+
+        // Only show GPS card if punch in happened today
+        if (punchInTime > 0 && isSameDay(punchInTime, System.currentTimeMillis())) {
+            val savedLat = prefs.getString("last_punch_in_lat_display", null)
+            val savedLng = prefs.getString("last_punch_in_lng_display", null)
+
+            if (savedLat != null && savedLng != null) {
+                tvLatitude.text = "Latitude: $savedLat"
+                tvLongitude.text = "Longitude: $savedLng"
+                cardGpsLocation.visibility = View.VISIBLE
+            }
+        }
     }
 
     /**

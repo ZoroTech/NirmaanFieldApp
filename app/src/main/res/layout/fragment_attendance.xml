@@ -165,6 +165,63 @@
         tools:visibility="visible"
         tools:src="@android:drawable/ic_dialog_info" />
 
+    <!-- GPS Location Card (Punch In Only) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardGpsLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPunchInPhoto"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- GPS Header -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GPS Location"
+                android:textColor="@color/gray_800"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Latitude -->
+            <TextView
+                android:id="@+id/tvLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Latitude: --"
+                android:textColor="@color/gray_700"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.02" />
+
+            <!-- Longitude -->
+            <TextView
+                android:id="@+id/tvLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Longitude: --"
+                android:textColor="@color/gray_700"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.02" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <!-- Punch Out Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPunchOut"
@@ -186,7 +243,7 @@
         app:iconSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivPunchInPhoto" />
+        app:layout_constraintTop_toBottomOf="@id/cardGpsLocation" />
 
     <!-- Today's Attendance Summary Card -->
     <com.google.android.material.card.MaterialCardView
